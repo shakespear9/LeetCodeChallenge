@@ -4,7 +4,7 @@ namespace LeetCode
 {
     public class EasySolution
     {
-        public bool IsPalindrome(int x)
+        public static bool IsPalindrome(int x)
         {
             string original = x.ToString();
             var charArray = original.ToCharArray();
@@ -15,6 +15,22 @@ namespace LeetCode
 
             return false;
 
+        }
+
+        public static bool IsPalindrome2(int x)
+        {
+            if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+
+
+            int reversedHalf = 0;
+            while (x > reversedHalf)
+            {
+                // take 2nd half of number to compare the 1st half of number by divide by 10 for each loop
+                reversedHalf = reversedHalf * 10 + x % 10;
+                x /= 10;
+            }
+
+            return x == reversedHalf || x == reversedHalf / 10;
         }
 
         enum Roman
@@ -29,7 +45,7 @@ namespace LeetCode
             M = 1000,
         }
 
-        public int RomanToInt(string s)
+        public static int RomanToInt(string s)
         {
             var result = 0;
             Roman beforeSymbol = Roman.O;
